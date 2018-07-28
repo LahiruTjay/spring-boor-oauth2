@@ -30,20 +30,21 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
+
         http.addFilterAfter(new OncePerRequestFilter() {
             @Override
             protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-                // We don't want to allow access to a resource with no token so clear
-                // the security context in case it is actually an OAuth2Authentication
+                // We don't want to allow access to a resource with no token so clear the security context in case it is actually an OAuth2Authentication
                 if (tokenExtractor.extract(request) == null) {
                     SecurityContextHolder.clearContext();
                 }
                 filterChain.doFilter(request, response);
             }
         }, AbstractPreAuthenticatedProcessingFilter.class);
+
         http.csrf()
-            .disable();
-        http.authorizeRequests()
+            .disable()
+            .authorizeRequests()
             .anyRequest()
             .authenticated();
     }
