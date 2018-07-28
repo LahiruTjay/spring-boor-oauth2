@@ -40,30 +40,22 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-        String authType = request.getParameter("auth_type");
+        String fitId = request.getParameter("username");
+        String password = request.getParameter("password");
 
-        if (authType != null) {
+        SystemUser user = userRepository.findByUsernameIgnoreCase(fitId);
 
-            if (authType.equals("mobile")) {
-
-                String fitId = request.getParameter("username");
-                String password = request.getParameter("password");
-
-                SystemUser user = userRepository.findByUsernameIgnoreCase(fitId);
-
-                if (user != null) {
-                    if (password.equals(user.getPassword())) {
-                        // Give grant permission
-                        return retrieveToken(user);
-                    } else {
-                        throw new BadCredentialsException("Invalid credentials");
-                    }
-                } else {
-                    throw new BadCredentialsException("Invalid credentials");
-                }
+        if (user != null) {
+            if (password.equals(user.getPassword())) {
+                // Give grant permission
+                return retrieveToken(user);
+            } else {
+                throw new BadCredentialsException("Invalid credentials");
             }
+        } else {
+            throw new BadCredentialsException("Invalid credentials");
         }
-        return null;
+
     }
 
     private UsernamePasswordAuthenticationToken retrieveToken(SystemUser user) {
