@@ -59,9 +59,7 @@ public class CustomAuthenticationManager implements AuthenticationManager {
     }
 
     private UsernamePasswordAuthenticationToken retrieveToken(SystemUser user) {
-
         Set<GrantedAuthority> grantedAuthoritySet = customUserDetailsService.getGrantedAuthoritiesForUser(user);
-
         if (!grantedAuthoritySet.isEmpty()) {
             return new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), grantedAuthoritySet);
         } else {
