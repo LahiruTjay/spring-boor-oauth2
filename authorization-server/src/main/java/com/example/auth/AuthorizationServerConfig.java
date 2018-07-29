@@ -29,7 +29,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Autowired
     DataSource dataSource;
-    
+
     @Autowired
     public PasswordEncoder passwordEncoder;
 
@@ -45,7 +45,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.allowFormAuthenticationForClients().passwordEncoder(passwordEncoder);
+        security.allowFormAuthenticationForClients()
+            .passwordEncoder(passwordEncoder);
     }
 
     @Override
