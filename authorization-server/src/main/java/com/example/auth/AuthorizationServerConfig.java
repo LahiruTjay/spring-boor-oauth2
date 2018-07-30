@@ -33,6 +33,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     public PasswordEncoder passwordEncoder;
 
+    @Autowired
+    CustomTokenEnhancer tokenEnhancer;
+
     @Bean
     public JdbcTokenStore tokenStore() {
         return new JdbcTokenStore(dataSource);
@@ -60,6 +63,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
             .authenticationManager(authenticationManager)
             .userDetailsService(userDetailsService)
             .tokenStore(tokenStore())
+            .tokenEnhancer(tokenEnhancer)
             .approvalStoreDisabled();
     }
 
