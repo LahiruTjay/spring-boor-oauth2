@@ -13,11 +13,12 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
-@Order(2)
-public class CustomFilter implements Filter {
+@Order(1)
+public class CustomFilter2 implements Filter {
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        System.out.println("Custom Filter");
+        System.out.println("Custom Filter 2");
         chain.doFilter(request, response);
     }
     
