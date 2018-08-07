@@ -32,11 +32,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
 
         http.csrf()
-        .disable()
-        .authorizeRequests()
-        .anyRequest()
-        .authenticated();
-        
+            .disable()
+            .authorizeRequests()
+            .anyRequest()
+            .authenticated();
+
         http.addFilterAfter(new OncePerRequestFilter() {
             @Override
             protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

@@ -36,10 +36,10 @@ public class TestController {
     String getName5() {
         return "OK p";
     }
-    
+
     @RequestMapping(value = "/o/test", method = RequestMethod.GET)
     String getName6() {
         return "OK p not";
     }
-    
+
 }
