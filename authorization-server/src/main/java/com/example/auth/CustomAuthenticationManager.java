@@ -42,15 +42,14 @@ public class CustomAuthenticationManager implements AuthenticationManager {
         HttpServletRequest request = attributes.getRequest();
         String fitId = request.getParameter("username");
         String password = request.getParameter("password");
-        
+
         System.out.println("Auth Manager");
 
         SystemUser user = userRepository.findByUsernameIgnoreCase(fitId);
 
         if (user != null) {
             if (password.equals(user.getPassword())) {
-                // Give grant permission
-                return retrieveToken(user);
+                return retrieveToken(user); // Give grant permission
             } else {
                 throw new BadCredentialsException("Invalid credentials");
             }

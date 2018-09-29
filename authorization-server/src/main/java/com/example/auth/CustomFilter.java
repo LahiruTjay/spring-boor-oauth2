@@ -20,9 +20,9 @@ public class CustomFilter implements Filter {
         System.out.println("Custom Filter");
         chain.doFilter(request, response);
     }
-    
+
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException { 
+    public void init(FilterConfig filterConfig) throws ServletException {
     }
 
     @Override
