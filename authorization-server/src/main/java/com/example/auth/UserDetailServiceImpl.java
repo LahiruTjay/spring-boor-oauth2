@@ -55,14 +55,15 @@ public class UserDetailServiceImpl implements UserDetailsService {
     public Set<GrantedAuthority> getGrantedAuthoritiesForUser(SystemUser user) {
 
         Set<GrantedAuthority> grantedAuthoritySet = new HashSet<>();
-        String userRole = user.getRole().getRoleName();
+        String userRole = user.getRole()
+            .getRoleName();
 
         if (userRole != null) {
             Role role = roleRepository.findByRoleName(userRole);
             if (role != null) {
                 roleAuthorityRepository.findAllByRole(role).forEach(roleAuthority -> {
-                        grantedAuthoritySet.add(new SimpleGrantedAuthority(roleAuthority.getAuthority().getAuthority()));
-                    });
+                    grantedAuthoritySet.add(new SimpleGrantedAuthority(roleAuthority.getAuthority().getAuthority()));
+                });
                 return grantedAuthoritySet;
             } else {
                 throw new RoleNotFoundException();
