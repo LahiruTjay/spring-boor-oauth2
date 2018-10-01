@@ -44,7 +44,6 @@ public class CustomAuthenticationManager implements AuthenticationManager {
         String password = request.getParameter("password");
 
         SystemUser user = userRepository.findByUsernameIgnoreCase(fitId);
-
         if (user != null) {
             if (password.equals(user.getPassword())) {
                 return retrieveToken(user); // Give grant permission
@@ -54,7 +53,6 @@ public class CustomAuthenticationManager implements AuthenticationManager {
         } else {
             throw new BadCredentialsException("Invalid credentials");
         }
-
     }
 
     private UsernamePasswordAuthenticationToken retrieveToken(SystemUser user) {
