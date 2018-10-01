@@ -43,8 +43,6 @@ public class CustomAuthenticationManager implements AuthenticationManager {
         String fitId = request.getParameter("username");
         String password = request.getParameter("password");
 
-        System.out.println("Auth Manager");
-
         SystemUser user = userRepository.findByUsernameIgnoreCase(fitId);
 
         if (user != null) {
