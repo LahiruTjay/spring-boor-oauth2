@@ -55,8 +55,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
     public Set<GrantedAuthority> getGrantedAuthoritiesForUser(SystemUser user) {
 
         Set<GrantedAuthority> grantedAuthoritySet = new HashSet<>();
-        String userRole = user.getRole()
-            .getRoleName();
+        String userRole = user.getRole().getRoleName();
 
         if (userRole != null) {
             Role role = roleRepository.findByRoleName(userRole);
